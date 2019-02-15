@@ -1,0 +1,37 @@
+---
+title: "Airbnb_Market_Research"
+author: "刘家钰"
+date: "2019/2/14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(ggthemes)
+library(DBI)
+library(RPostgreSQL)
+
+berlin <- read.csv('/Users/l.crystal/Desktop/Airbnb_Market_Data/Data/berlin.csv')
+vienna <- read.csv('/Users/l.crystal/Desktop/Airbnb_Market_Data/Data/vienna.csv')
+```
+
+
+```{r berlin vienna}
+#summary(berlin)
+summary(vienna$minimum_nights)
+```
+
+
+```{r vienna—price, echo=FALSE}
+vienna %>% 
+    filter(minimum_nights<=5,price<=200) %>% 
+    mutate(minimum_nights=as.factor(minimum_nights)) %>% 
+    ggplot(aes(x=minimum_nights,y=price,color=minimum_nights)) +
+    geom_boxplot()
+```
+```{r echo=FALSE}
+
+```
+
